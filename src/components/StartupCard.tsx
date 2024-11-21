@@ -4,13 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 
-const StartupCard = ({ post }: { post: StartupTypeCard }) => {
-    const { _createdAt, views, author: { _id: authorId, name }, title, description, category, _id, image } = post;
+export type StartupCardType = {
+    _id: string,
+    title: string,
+    author: {
+        _id: string,
+        name: string,
+        image: string,
+    }
+    views: number,
+    description: string,
+    category: string,
+    image: string,
+    createdAt: Date
+}
+
+const StartupCard = ({ post }: { post: StartupCardType }) => {
+    const { createdAt, views, author: { _id: authorId, name, image: authorImg }, title, description, category, _id, image } = post;
     return (
         <li className="startup-card group">
             <div className="flex-between">
                 <p className="startup_card_date">
-                    {formatDate(_createdAt)}
+                    {formatDate(createdAt.toString())}
                 </p>
                 <div className="flex gap-1.5">
                     <EyeIcon className="size-6 text-primary" />
@@ -28,7 +43,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
                     </Link>
                 </div>
                 <Link href={`/user/${authorId}`}>
-                    <Image src={"https://placehold.co/48x48"} alt="placeholder"
+                    <Image src={authorImg} alt="placeholder"
                         width={48} height={48} className="rounded-full" />
                 </Link>
             </div>

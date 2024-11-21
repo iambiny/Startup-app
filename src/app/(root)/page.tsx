@@ -1,24 +1,12 @@
-import { title } from "process";
 import SearchForm from "../../components/SearchForm";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupCardType } from "@/components/StartupCard";
+import axios from "axios";
 
 export default async function Home({ searchParams }: {
     searchParams: Promise<{ query?: string }>
 }) {
     const query = (await searchParams).query;
-    const posts = [{
-        _createdAt: new Date(),
-        views: 55,
-        author: {
-            _id: 1,
-            name: 'John Sena'
-        },
-        _id: 1,
-        description: 'This is a description',
-        image: 'https://c.pxhere.com/images/d1/6d/20d6e315f9b0d6567b582f7c5423-1668138.jpg!d',
-        category: "Robots",
-        title: "My Robots"
-    }]
+    const posts = (await axios.get('http://localhost:8000/api/startups')).data;
 
     return (
         <>
@@ -37,7 +25,7 @@ export default async function Home({ searchParams }: {
 
                 <ul className="mt-7 card_grid">
                     {posts.length > 0 ? (
-                        posts.map((post: StartupCardType, idx: number) => (
+                        posts.map((post: StartupCardType) => (
                             <StartupCard key={post._id} post={post} />
                         ))
                     ) : (
