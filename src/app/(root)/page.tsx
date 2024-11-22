@@ -2,7 +2,7 @@ import SearchForm from "../../components/SearchForm";
 import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import axios from "axios";
 
-export default async function Home({ searchParams }: {
+export default async function Page({ searchParams }: {
     searchParams: Promise<{ query?: string }>
 }) {
     const query = (await searchParams).query;
