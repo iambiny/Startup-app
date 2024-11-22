@@ -2,6 +2,7 @@ import axios from "axios";
 import { notFound } from "next/navigation";
 
 export const experimental_ppr = true;
+export const revalidate = 60;       // enable ISG
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     const id = (await params).id;
