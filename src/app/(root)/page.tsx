@@ -8,7 +8,8 @@ export default async function Page({ searchParams }: {
     searchParams: Promise<{ query?: string }>
 }) {
     const query = (await searchParams).query;
-    const session: Session & { id?: string } | null = await auth();
+    const session = await auth();
+    // const session: Session & { id?: string } | null = await auth();
     console.log(session?.id);
     const posts = (await axios.get('http://localhost:8000/api/startups', {
         params: {
