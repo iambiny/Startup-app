@@ -28,18 +28,18 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                 <p className="sub-heading !max-w-5xl">{post.description}</p>
             </section>
             <section className="section_container">
-                <img 
-                    src={post.image} 
-                    alt="thumbnail" 
+                <img
+                    src={post.image}
+                    alt="thumbnail"
                     className="w-full h-auto rounded-xl"
                 />
                 <div className="space-y-5 mt-10 max-w-4xl mx-auto">
                     <div className="flex-between gap-5">
-                        <Link 
+                        <Link
                             href={`/user/${post.author._id}`}
                             className="flex gap-2 items-center mb-3"
                         >
-                            <Image 
+                            <Image
                                 src={post.author.image} alt="avatar"
                                 width={64} height={64}
                                 className="rounded-full drop-shadow-lg"
@@ -52,7 +52,11 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                         <p className="category-tag">{post.category}</p>
                     </div>
                     <h3 className="text-30-bold">Post Details</h3>
-                    <p>{post.details}</p>
+                    <div>
+                        {post.details.split(/(\n|  )/g).map((paragraph: string, index: number) => (
+                            <p key={index} className="mb-3">{paragraph.trim()}</p>
+                        ))}
+                    </div>
                 </div>
                 <hr className="divider" />
 
