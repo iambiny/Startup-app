@@ -3,6 +3,7 @@ import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Skeleton } from "./ui/skeleton";
 
 export type StartupCardType = {
     _id: string,
@@ -64,5 +65,15 @@ const StartupCard = ({ post }: { post: StartupCardType }) => {
         </li>
     )
 }
+
+export const StartupCardSkeleton = () => (
+    <>
+        {[0, 1, 2, 3, 4, 5].map(index => (
+            <li key={`skeleton${index}`}>
+                <Skeleton className="startup-card_skeleton" />
+            </li>
+        ))}
+    </>
+)
 
 export default StartupCard;
